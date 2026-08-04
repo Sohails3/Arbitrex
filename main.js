@@ -1,6 +1,9 @@
 /* ==========================================================================
    Arbitrex — interaction layer
-   Dependency-free. All motion respects prefers-reduced-motion.
+
+   Per ARBITREX_DESIGN_SYSTEM.md §9, motion here is deliberately quiet: one-shot
+   entrances only, no scroll-driven effects, no counters, no parallax. Anything
+   that would "bounce or snap" is intentionally absent.
    ========================================================================== */
 (function () {
   'use strict';
@@ -8,22 +11,15 @@
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------------------------------------------------------------
-     Sticky nav — add glass background once scrolled past the top
+     Sticky nav — hairline + soft shadow once scrolled off the top
      --------------------------------------------------------------- */
   var nav = document.getElementById('nav');
-  var progress = document.getElementById('scrollProgress');
+  var ticking = false;
 
   function onScroll() {
-    if (nav) nav.classList.toggle('is-stuck', window.scrollY > 24);
-
-    if (progress) {
-      var max = document.documentElement.scrollHeight - window.innerHeight;
-      var pct = max > 0 ? window.scrollY / max : 0;
-      progress.style.transform = 'scaleX(' + pct + ')';
-    }
+    if (nav) nav.classList.toggle('is-stuck', window.scrollY > 8);
   }
 
-  var ticking = false;
   window.addEventListener('scroll', function () {
     if (ticking) return;
     ticking = true;
@@ -68,14 +64,20 @@
   }
 
   /* ---------------------------------------------------------------
-     Scroll reveal + one-shot triggers (chart draw, step rules)
+     Entrance reveal — §9 brand-rise, plays once per element.
+     Elements start at opacity:0 in CSS, so every fallback path below
+     must guarantee .is-visible is applied.
      --------------------------------------------------------------- */
-  var revealTargets = document.querySelectorAll('.reveal, .step, .panel');
+  var risers = document.querySelectorAll('.rise');
 
-  if (!('IntersectionObserver' in window) || reduceMotion) {
-    Array.prototype.forEach.call(revealTargets, function (el) {
+  function revealAll() {
+    Array.prototype.forEach.call(risers, function (el) {
       el.classList.add('is-visible');
     });
+  }
+
+  if (!('IntersectionObserver' in window) || reduceMotion) {
+    revealAll();
   } else {
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -83,79 +85,54 @@
         entry.target.classList.add('is-visible');
         observer.unobserve(entry.target);
       });
-    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    // Stagger siblings so grids cascade rather than popping in together
-    Array.prototype.forEach.call(revealTargets, function (el) {
+    Array.prototype.forEach.call(risers, function (el) {
+      // Gentle stagger within a row of siblings — capped so later cards
+      // never feel like they are lagging behind the scroll.
       var siblings = el.parentElement ? el.parentElement.children : [];
       var index = Array.prototype.indexOf.call(siblings, el);
-      el.style.transitionDelay = Math.min(index, 6) * 70 + 'ms';
+      el.style.animationDelay = Math.min(index, 4) * 60 + 'ms';
       observer.observe(el);
     });
+
+    // Safety net: if anything is still hidden after load, show it.
+    window.addEventListener('load', function () {
+      window.setTimeout(function () {
+        Array.prototype.forEach.call(risers, function (el) {
+          var box = el.getBoundingClientRect();
+          if (box.top < window.innerHeight && !el.classList.contains('is-visible')) {
+            el.classList.add('is-visible');
+          }
+        });
+      }, 300);
+    });
   }
 
   /* ---------------------------------------------------------------
-     Count-up numbers — runs once when the figure scrolls into view
+     Active section highlighting in the nav
      --------------------------------------------------------------- */
-  var counters = document.querySelectorAll('[data-count]');
+  var navLinks = document.querySelectorAll('.nav__link');
+  var sections = [];
 
-  function renderCount(el, value, decimals, suffix) {
-    el.textContent = value.toFixed(decimals) + suffix;
-  }
+  Array.prototype.forEach.call(navLinks, function (link) {
+    var id = link.getAttribute('href');
+    if (!id || id.charAt(0) !== '#' || id.length < 2) return;
+    var section = document.querySelector(id);
+    if (section) sections.push({ link: link, section: section });
+  });
 
-  function animateCount(el) {
-    var target = parseFloat(el.getAttribute('data-count'));
-    var suffix = el.getAttribute('data-suffix') || '';
-    var decimals = (el.getAttribute('data-count').split('.')[1] || '').length;
-
-    if (isNaN(target)) return;
-    if (reduceMotion) {
-      renderCount(el, target, decimals, suffix);
-      return;
-    }
-
-    var duration = 1600;
-    var start = null;
-
-    function frame(timestamp) {
-      if (start === null) start = timestamp;
-      var elapsed = timestamp - start;
-      var t = Math.min(elapsed / duration, 1);
-      var eased = 1 - Math.pow(1 - t, 4); // expo-ish ease-out
-      renderCount(el, target * eased, decimals, suffix);
-      if (t < 1) window.requestAnimationFrame(frame);
-    }
-
-    window.requestAnimationFrame(frame);
-  }
-
-  if (!('IntersectionObserver' in window)) {
-    Array.prototype.forEach.call(counters, animateCount);
-  } else {
-    var countObserver = new IntersectionObserver(function (entries) {
+  if (sections.length && 'IntersectionObserver' in window) {
+    var sectionObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        animateCount(entry.target);
-        countObserver.unobserve(entry.target);
+        sections.forEach(function (pair) {
+          pair.link.classList.toggle('is-active', pair.section === entry.target);
+        });
       });
-    }, { threshold: 0.5 });
+    }, { rootMargin: '-45% 0px -50% 0px' });
 
-    Array.prototype.forEach.call(counters, function (el) {
-      countObserver.observe(el);
-    });
-  }
-
-  /* ---------------------------------------------------------------
-     Card spotlight — track the cursor within each card
-     --------------------------------------------------------------- */
-  if (!reduceMotion && window.matchMedia('(hover: hover)').matches) {
-    Array.prototype.forEach.call(document.querySelectorAll('.card'), function (card) {
-      card.addEventListener('pointermove', function (e) {
-        var rect = card.getBoundingClientRect();
-        card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
-        card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
-      });
-    });
+    sections.forEach(function (pair) { sectionObserver.observe(pair.section); });
   }
 
   /* ---------------------------------------------------------------
