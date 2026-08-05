@@ -69,6 +69,44 @@
 
   /* §9 Motion */
   --ease-brand: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Aurora background (src/components/ui/aurora-background.tsx).
+     Tailwind v4 has no JS config, so the upstream `animation`/`keyframes`
+     extend becomes a --animate-* theme key plus a @keyframes block. */
+  --animate-aurora: aurora 60s linear infinite;
+
+  @keyframes aurora {
+    from { background-position: 50% 50%, 50% 50%; }
+    to { background-position: 350% 50%, 350% 50%; }
+  }
+}
+
+/* Short colour aliases the aurora gradients read. Upstream relies on the v3
+   `addVariablesForColors` plugin to expose every palette entry as --<name>;
+   v4 names them --color-<name>. The aurora stops themselves use the brand
+   --color-* tokens directly, so only these three literals are needed. */
+:root {
+  --white: #ffffff;
+  --black: #000000;
+  --transparent: transparent;
+
+  /* Motiq tokens for src/components/ui/border-beam-panel.tsx, mapped onto the
+     Arbitrex palette. Upstream injects a dark-themed default set from inside
+     the component in `@layer motiq`; that layer is declared after Tailwind's,
+     so it would outrank anything we put in @theme or @layer base. Declaring
+     them unlayered here wins over any layer regardless of order. */
+  --motiq-accent: #7a1e32; /* gold-400 */
+  --motiq-accent-text: #5c1524; /* gold-500 */
+  --motiq-bg: #faf8f7; /* navy-950 */
+  --motiq-border: #ece1e0; /* navy-800 */
+  --motiq-border-strong: #decece; /* navy-700 */
+  --motiq-fg: #1c1417; /* slate-100 */
+  --motiq-fg-secondary: #514042; /* slate-300 */
+  --motiq-muted: #826c6e; /* slate-500 */
+  --motiq-secondary-accent: #9b4358; /* gold-600 */
+  --motiq-signature: #cbb2b0; /* navy-600 — the second comet, kept quiet */
+  --motiq-surface: #ffffff; /* navy-900 */
+  --motiq-surface-2: #f7f1f0; /* navy-850 */
 }
 
 /* --------------------------------------------------------------------------
@@ -112,6 +150,22 @@
    Components — §8 patterns as reusable classes
    -------------------------------------------------------------------------- */
 @layer components {
+  /* Page gutter. Was max-w-[1120px], which on a 1920px display left the
+     content in the middle ~58% of the viewport. 1440px reads as ~75% while
+     still holding line length on text blocks (those cap themselves). */
+  .container-page {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 1440px;
+    padding-inline: 2.5rem;
+  }
+
+  @media (width <= 768px) {
+    .container-page {
+      padding-inline: 1.25rem;
+    }
+  }
+
   /* §8.1 — the most-reused pattern in the product */
   .surface-card {
     border: 1px solid var(--color-navy-800);
@@ -165,6 +219,23 @@
     opacity: 1;
     transform: none;
   }
+}
+
+/* Route change — app/template.tsx remounts on every navigation, so this plays
+   each time a new page mounts. It is the main cue that you have gone somewhere
+   rather than scrolled somewhere. */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.page-enter {
+  animation: page-enter 0.5s var(--ease-brand) both;
 }
 
 @keyframes dot-pulse {

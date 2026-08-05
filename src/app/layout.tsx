@@ -1,17 +1,23 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SiteNav } from "@/components/site-nav";
+import { SiteFooter } from "@/components/site-footer";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.arbitrex.co.uk"),
-  title: "Arbitrex — Company intelligence, sourced and provable",
+  title: {
+    default: "Arbitrex — Vertical software for investment banks and private equity",
+    template: "%s — Arbitrex",
+  },
   description:
-    "Arbitrex surfaces company intelligence with the source shown next to every number, so filed fact and model estimate are never mistaken for one another.",
+    "Arbitrex is a vertical software system that streamlines process for investment banks and private equity firms — sourcing, screening, diligence and monitoring in one place.",
   openGraph: {
     type: "website",
     url: "https://www.arbitrex.co.uk",
-    title: "Arbitrex — Company intelligence, sourced and provable",
+    title: "Arbitrex — Vertical software for investment banks and private equity",
     description:
-      "Every data point shows where it came from. Filed fact, register record and model estimate are always visually distinct.",
+      "Built by people who have worked in private equity and investment banking, around the workflow they know is slow.",
     images: ["/assets/logo-256.png"],
   },
   twitter: { card: "summary" },
@@ -30,7 +36,19 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en-GB">
-      <body>{children}</body>
+      <body>
+        {/* Page-level aurora. Fixed to the viewport rather than sized to the
+            document, so it stays one screen tall however long the page is and
+            the content scrolls over it. -z-10 keeps it above the body colour
+            but below every surface. */}
+        <AuroraBackground
+          aria-hidden
+          className="pointer-events-none fixed inset-0 -z-10 h-screen bg-transparent"
+        />
+        <SiteNav />
+        <main>{children}</main>
+        <SiteFooter />
+      </body>
     </html>
   );
 }

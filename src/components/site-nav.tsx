@@ -1,22 +1,27 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
-  { href: "#product", label: "Product" },
-  { href: "#provenance", label: "Provenance" },
-  { href: "#process", label: "How it works" },
-  { href: "#contact", label: "Contact" },
+  { href: "/product", label: "Product" },
+  { href: "/how-it-works", label: "How it works" },
+  { href: "/provenance", label: "Provenance" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function SiteNav() {
   const [stuck, setStuck] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState<string | null>(null);
+  // next.config sets trailingSlash, so usePathname reports "/product/". Strip
+  // it so the comparison against LINKS ("/product") matches.
+  const pathname = usePathname().replace(/\/+$/, "") || "/";
   const lastY = useRef(0);
   const openRef = useRef(false);
 
@@ -46,27 +51,6 @@ export function SiteNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Highlight whichever section is centred in the viewport.
-  useEffect(() => {
-    if (typeof IntersectionObserver === "undefined") return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-
-    LINKS.forEach(({ href }) => {
-      const el = document.querySelector(href);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
@@ -86,8 +70,8 @@ export function SiteNav() {
         hidden && "-translate-y-full",
       )}
     >
-      <div className="mx-auto flex w-full max-w-[1120px] items-center justify-between gap-8 px-8 max-md:px-5">
-        <a href="#" className="group inline-flex items-center gap-3" aria-label="Arbitrex home">
+      <div className="container-page flex items-center justify-between gap-8">
+        <Link href="/" className="group inline-flex items-center gap-3" aria-label="Arbitrex home">
           <Image
             src="/assets/logo-256.png"
             alt=""
@@ -97,32 +81,39 @@ export function SiteNav() {
             className="size-10 rounded-xl transition-transform duration-500 ease-[var(--ease-brand)] group-hover:scale-105"
           />
           <span className="text-base font-bold tracking-wide text-slate-100">Arbitrex</span>
-        </a>
+        </Link>
 
         <nav className="mx-auto flex items-center gap-1 max-md:hidden" aria-label="Primary">
-          {LINKS.map(({ href, label }) => (
-            <a
-              key={href}
-              href={href}
-              className={cn(
-                "rounded-xl px-3 py-2.5 text-sm font-medium transition-colors duration-150",
-                active === href
-                  ? "bg-gold-400/10 text-gold-400"
-                  : "text-slate-500 hover:bg-navy-850 hover:text-slate-200",
-              )}
-            >
-              {label}
-            </a>
-          ))}
+          {LINKS.map(({ href, label }) => {
+            const active = pathname === href;
+            return (
+              <Link
+                key={href}
+                href={href}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "relative rounded-xl px-3 py-2.5 text-sm transition-colors duration-150",
+                  "after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:rounded-full",
+                  "after:origin-left after:scale-x-0 after:bg-gold-400",
+                  "after:transition-transform after:duration-300 after:ease-[var(--ease-brand)]",
+                  active
+                    ? "font-semibold text-gold-400 after:scale-x-100"
+                    : "font-medium text-slate-500 hover:bg-navy-850 hover:text-slate-200 hover:after:scale-x-100 hover:after:bg-navy-600",
+                )}
+              >
+                {label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href="#contact"
+          <Link
+            href="/contact"
             className="inline-flex min-h-11 items-center justify-center rounded-lg bg-gold-500 px-3.5 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-gold-400"
           >
             Request access
-          </a>
+          </Link>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
@@ -137,14 +128,20 @@ export function SiteNav() {
         {open && (
           <div className="absolute inset-x-4 top-19 flex flex-col gap-1 rounded-2xl border border-navy-800 bg-navy-900 p-2 shadow-elevated md:hidden">
             {LINKS.map(({ href, label }) => (
-              <a
+              <Link
                 key={href}
                 href={href}
                 onClick={() => setOpen(false)}
-                className="rounded-xl px-4 py-3 text-sm font-medium text-slate-500 hover:bg-navy-850 hover:text-slate-200"
+                aria-current={pathname === href ? "page" : undefined}
+                className={cn(
+                  "rounded-xl px-4 py-3 text-sm",
+                  pathname === href
+                    ? "bg-gold-400/10 font-semibold text-gold-400"
+                    : "font-medium text-slate-500 hover:bg-navy-850 hover:text-slate-200",
+                )}
               >
                 {label}
-              </a>
+              </Link>
             ))}
           </div>
         )}

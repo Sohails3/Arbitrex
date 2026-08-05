@@ -43,7 +43,8 @@ const ALERTS = [
   { Icon: TrendingUp, title: "Bramley & Co crossed your size threshold", meta: "Turnover £2.6m · 3 days ago" },
 ];
 
-export function FramesSection() {
+/** `showHeader` is off when the page already supplies a PageHeader masthead. */
+export function FramesSection({ showHeader = true }: { showHeader?: boolean }) {
   const [activeFrame, setActiveFrame] = useState(0);
   const [stacked, setStacked] = useState(false);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -128,17 +129,19 @@ export function FramesSection() {
   const subtitles = [undefined, "Northfield Ltd", "3 new"];
 
   return (
-    <section id="process" className="relative py-28 max-lg:py-20">
-      <div className="mx-auto w-full max-w-[1120px] px-8 max-md:px-5">
-        <Reveal className="mb-16 max-w-3xl">
-          <SectionLabel>How it works</SectionLabel>
-          <h2 className="mb-4 text-[clamp(1.5rem,1.4rem+2vw,2.5rem)] tracking-tight">
-            From register to shortlist
-          </h2>
-          <p className="max-w-2xl text-base leading-relaxed text-slate-400">
-            Three steps, one continuous view. Scroll to move through them.
-          </p>
-        </Reveal>
+    <section className="relative py-28 max-lg:py-20">
+      <div className="container-page">
+        {showHeader && (
+          <Reveal className="mb-16 max-w-3xl">
+            <SectionLabel>How it works</SectionLabel>
+            <h2 className="mb-4 text-[clamp(1.5rem,1.4rem+2vw,2.5rem)] tracking-tight">
+              From register to shortlist
+            </h2>
+            <p className="max-w-2xl text-base leading-relaxed text-slate-400">
+              Three steps, one continuous view. Scroll to move through them.
+            </p>
+          </Reveal>
+        )}
 
         <div className="grid grid-cols-[0.85fr_1.15fr] items-start gap-16 max-lg:grid-cols-1 max-lg:gap-8">
           {/* Steps — these scroll */}
