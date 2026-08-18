@@ -6,11 +6,13 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { TOOLS } from "@/lib/tools";
 
+// The two tools sit at the top level rather than under a "Products" menu —
+// the point of the site is that there is more than one of them.
 const LINKS = [
-  { href: "/product", label: "Product" },
-  { href: "/how-it-works", label: "How it works" },
-  { href: "/provenance", label: "Provenance" },
+  { href: "/services", label: "Services" },
+  ...TOOLS.map(({ href, nav }) => ({ href, label: nav })),
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -19,8 +21,8 @@ export function SiteNav() {
   const [stuck, setStuck] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
-  // next.config sets trailingSlash, so usePathname reports "/product/". Strip
-  // it so the comparison against LINKS ("/product") matches.
+  // next.config sets trailingSlash, so usePathname reports "/services/". Strip
+  // it so the comparison against LINKS ("/services") matches.
   const pathname = usePathname().replace(/\/+$/, "") || "/";
   const lastY = useRef(0);
   const openRef = useRef(false);
@@ -70,7 +72,7 @@ export function SiteNav() {
         hidden && "-translate-y-full",
       )}
     >
-      <div className="container-page flex items-center justify-between gap-8">
+      <div className="container-page flex items-center justify-between gap-6">
         <Link href="/" className="group inline-flex items-center gap-3" aria-label="Arbitrex home">
           <Image
             src="/assets/logo-256.png"
@@ -83,7 +85,8 @@ export function SiteNav() {
           <span className="text-base font-bold tracking-wide text-slate-100">Arbitrex</span>
         </Link>
 
-        <nav className="mx-auto flex items-center gap-1 max-md:hidden" aria-label="Primary">
+        {/* Six items now the tools are top level, so this collapses at lg. */}
+        <nav className="mx-auto flex items-center gap-0.5 max-lg:hidden" aria-label="Primary">
           {LINKS.map(({ href, label }) => {
             const active = pathname === href;
             return (
@@ -92,8 +95,8 @@ export function SiteNav() {
                 href={href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "relative rounded-xl px-3 py-2.5 text-sm transition-colors duration-150",
-                  "after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:rounded-full",
+                  "relative rounded-xl px-2.5 py-2.5 text-sm whitespace-nowrap transition-colors duration-150",
+                  "after:absolute after:inset-x-2.5 after:-bottom-0.5 after:h-0.5 after:rounded-full",
                   "after:origin-left after:scale-x-0 after:bg-gold-400",
                   "after:transition-transform after:duration-300 after:ease-[var(--ease-brand)]",
                   active
@@ -112,21 +115,21 @@ export function SiteNav() {
             href="/contact"
             className="inline-flex min-h-11 items-center justify-center rounded-lg bg-gold-500 px-3.5 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-gold-400"
           >
-            Request access
+            Get in touch
           </Link>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-label={open ? "Close menu" : "Open menu"}
-            className="hidden size-11 items-center justify-center rounded-sm border border-navy-700 bg-navy-900 text-slate-300 max-md:inline-flex"
+            className="hidden size-11 items-center justify-center rounded-sm border border-navy-700 bg-navy-900 text-slate-300 max-lg:inline-flex"
           >
             <Menu size={20} strokeWidth={1.75} />
           </button>
         </div>
 
         {open && (
-          <div className="absolute inset-x-4 top-19 flex flex-col gap-1 rounded-2xl border border-navy-800 bg-navy-900 p-2 shadow-elevated md:hidden">
+          <div className="absolute inset-x-4 top-19 flex flex-col gap-1 rounded-2xl border border-navy-800 bg-navy-900 p-2 shadow-elevated lg:hidden">
             {LINKS.map(({ href, label }) => (
               <Link
                 key={href}

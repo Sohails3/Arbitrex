@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { SERVICES } from "@/lib/services";
+import { TOOLS } from "@/lib/tools";
 
 export function SiteFooter() {
   return (
     <footer className="mt-20 border-t border-navy-800 bg-navy-900 pt-16 pb-8">
       <div className="container-page">
-        <div className="mb-12 grid grid-cols-[1.6fr_1fr_1fr] gap-12 max-md:grid-cols-1 max-md:gap-8">
+        <div className="mb-12 grid grid-cols-[1.6fr_1fr_1fr_1fr] gap-12 max-lg:grid-cols-2 max-md:grid-cols-1 max-md:gap-8">
           <div>
             <span className="inline-flex items-center gap-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -12,16 +14,34 @@ export function SiteFooter() {
               <span className="text-base font-bold tracking-wide text-slate-100">Arbitrex</span>
             </span>
             <p className="mt-4 max-w-[22rem] text-sm leading-relaxed text-slate-400">
-              Vertical software for investment banks and private equity firms.
+              Software for investment banks and private equity firms — bespoke builds,
+              workflow automation and AI implementation.
             </p>
           </div>
 
           <div>
-            <h4 className="mb-4 text-xs font-semibold tracking-wide uppercase text-slate-500">Product</h4>
+            <h4 className="mb-4 text-xs font-semibold tracking-wide uppercase text-slate-500">Services</h4>
             <ul className="flex flex-col gap-3 text-sm">
-              <li><Link href="/product" className="text-slate-400 transition-colors duration-150 hover:text-gold-400">Overview</Link></li>
-              <li><Link href="/how-it-works" className="text-slate-400 transition-colors duration-150 hover:text-gold-400">How it works</Link></li>
-              <li><Link href="/provenance" className="text-slate-400 transition-colors duration-150 hover:text-gold-400">Provenance</Link></li>
+              {SERVICES.map(({ slug, title }) => (
+                <li key={slug}>
+                  <Link href={`/services#${slug}`} className="text-slate-400 transition-colors duration-150 hover:text-gold-400">
+                    {title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-4 text-xs font-semibold tracking-wide uppercase text-slate-500">Tools we have built</h4>
+            <ul className="flex flex-col gap-3 text-sm">
+              {TOOLS.map(({ slug, href, nav }) => (
+                <li key={slug}>
+                  <Link href={href} className="text-slate-400 transition-colors duration-150 hover:text-gold-400">
+                    {nav}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

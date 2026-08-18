@@ -59,9 +59,11 @@ export default function AboutPage() {
                 longlist, reconciling the same figures, chasing the same filings.
               </p>
               <p className="text-base leading-relaxed text-slate-400">
-                Arbitrex is the system we wanted then. Vertical rather than general
-                purpose, opinionated about the workflow, and honest about where every
-                number came from.
+                So we build the systems we wanted then — for other firms as bespoke
+                software, automation and AI implementation, and for ourselves as the tools
+                you can see on this site. Each one is aimed at a specific question rather
+                than at a category. Opinionated about the workflow, and honest about where
+                every number came from.
               </p>
             </Reveal>
 
@@ -86,7 +88,7 @@ export default function AboutPage() {
       <CtaSection
         heading="Tell us where your process hurts"
         body="If any of the above sounds like your week, we would be glad to hear which part costs you most. That is how the product gets built."
-        secondary={{ href: "/product", label: "See the product" }}
+        secondary={{ href: "/services", label: "See what we do" }}
       />
     </>
   );
