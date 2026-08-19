@@ -3,13 +3,12 @@ import { CtaSection, PageHeader } from "@/components/cta-section";
 import { SectionLabel } from "@/components/frames-section";
 import { Reveal } from "@/components/reveal";
 import { StrategicFitDemo } from "@/components/strategic-fit-demo";
-import { BorderBeamPanel } from "@/components/ui/border-beam-panel";
 import { STEPS } from "@/lib/strategic-fit-demo";
 
 export const metadata: Metadata = {
   title: "Strategic Fit Engine",
   description:
-    "One of the tools we have built: an engine that derives a counterparty's acquisition logic from its own deal history, then scores the universe against it — buy-side or sell-side.",
+    "One of the tools we have built: an engine that derives a counterparty's acquisition logic from its own deal history, then scores the universe against it, whether buy-side or sell-side.",
 };
 
 /** What the engine does and does not replace. Stated plainly, on purpose. */
@@ -29,13 +28,13 @@ const HONESTY = [
   {
     claim: "Live financial screening",
     manual: "PitchBook or CapIQ, licensed and current",
-    engine: "Model-derived unless verified — flagged as such in every output",
+    engine: "Model-derived unless verified, and flagged as such in every output",
     covered: false,
   },
   {
     claim: "Off-market companies",
     manual: "The real advantage, and it comes from the network",
-    engine: "Not covered — the engine only sees a public footprint",
+    engine: "Not covered; the engine only sees a public footprint",
     covered: false,
   },
 ];
@@ -46,7 +45,7 @@ export default function StrategicFitEnginePage() {
       <PageHeader
         label="Strategic Fit Engine"
         title="Strategic Fit Engine"
-        intro="One of the tools we have built. It answers a question that usually costs a deal team weeks — who should buy this company, or what should this buyer acquire — by deriving the answer from the counterparty's own behaviour rather than from a generic screen."
+        intro="One of the tools we have built. It answers a question that usually costs a deal team weeks: who should buy this company, or what should this buyer acquire. It gets there by deriving the answer from the counterparty's own behaviour rather than from a generic screen."
       />
 
       {/* ===================== THE PREMISE ===================== */}
@@ -59,15 +58,15 @@ export default function StrategicFitEnginePage() {
                 Most target lists are built backwards
               </h2>
               <p className="mb-5 text-base leading-relaxed text-slate-400">
-                The usual approach starts with the universe — everything in the sector, in the
-                geography, in the size band — and narrows it with judgement applied at the end.
+                The usual approach starts with the universe (everything in the sector, in the
+                geography, in the size band) and narrows it with judgement applied at the end.
                 The criteria that actually decide the outcome never get written down, so the list
                 cannot be argued with and cannot be rerun.
               </p>
               <p className="text-base leading-relaxed text-slate-400">
                 This engine inverts that. It spends its first pass entirely on the counterparty:
                 what they have bought, at what size, to fill which gap, and what their competitors
-                just took off the board. The scoring rubric falls out of that reading — so every
+                just took off the board. The scoring rubric falls out of that reading, so every
                 rank has a stated reason behind it, and changing the counterparty changes the
                 criteria rather than just reshuffling the same list.
               </p>
@@ -75,13 +74,7 @@ export default function StrategicFitEnginePage() {
 
             <Reveal variant="right" className="flex flex-col gap-4">
               {STEPS.map(({ title, text }, i) => (
-                <BorderBeamPanel
-                  key={title}
-                  seed={i + 1}
-                  radius={16}
-                  thickness={2}
-                  className="flex gap-4 p-5 shadow-card"
-                >
+                <div key={title} className="surface-card flex gap-4 p-5">
                   <span className="grid size-8 shrink-0 place-items-center rounded-full border border-gold-500 bg-gold-500 text-xs font-bold text-white">
                     {i + 1}
                   </span>
@@ -89,7 +82,7 @@ export default function StrategicFitEnginePage() {
                     <span className="mb-1.5 block text-base font-semibold">{title}</span>
                     <span className="block text-sm leading-relaxed text-slate-400">{text}</span>
                   </span>
-                </BorderBeamPanel>
+                </div>
               ))}
             </Reveal>
           </div>

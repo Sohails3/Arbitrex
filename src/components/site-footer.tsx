@@ -14,7 +14,7 @@ export function SiteFooter() {
               <span className="text-base font-bold tracking-wide text-slate-100">Arbitrex</span>
             </span>
             <p className="mt-4 max-w-[22rem] text-sm leading-relaxed text-slate-400">
-              Software for investment banks and private equity firms — bespoke builds,
+              Software for investment banks and private equity firms: bespoke builds,
               workflow automation and AI implementation.
             </p>
           </div>

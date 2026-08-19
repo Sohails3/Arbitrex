@@ -9,7 +9,7 @@ import { Reveal } from "@/components/reveal";
 const STEPS = [
   {
     title: "Define the mandate",
-    text: "Set the criteria that matter — sector, size, geography, trajectory. They become a reusable screen rather than a one-off query.",
+    text: "Set the criteria that matter: sector, size, geography, trajectory. They become a reusable screen rather than a one-off query.",
   },
   {
     title: "Work the results",
@@ -125,7 +125,7 @@ export function FramesSection({ showHeader = true }: { showHeader?: boolean }) {
     </div>,
   ];
 
-  const titles = ["Mandate criteria", "Mandate fit", "Watch — trigger inbox"];
+  const titles = ["Mandate criteria", "Mandate fit", "Watch: trigger inbox"];
   const subtitles = [undefined, "Northfield Ltd", "3 new"];
 
   return (

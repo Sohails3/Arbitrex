@@ -55,10 +55,10 @@ export const RUNS: Run[] = [
     counterpartyRole: "Buyer",
     counterparty: "Duolingo",
     sector: "Coding education and developer learning",
-    geography: "Europe — UK, Germany, France, Nordics, Netherlands",
+    geography: "Europe: UK, Germany, France, Nordics, Netherlands",
     universeLabel: "targets",
     dnaHeadline:
-      "Three sub-$50m acqui-hires of creative and gaming studios — a product-first buyer, not a revenue buyer.",
+      "Three sub-$50m acqui-hires of creative and gaming studios: a product-first buyer, not a revenue buyer.",
     dnaPoints: [
       { label: "Acquisitions read", value: "NextBeat 2025 · Hobbes 2024 · Gunner 2022" },
       { label: "Pattern", value: "Talent and IP tuck-ins under $50m" },
@@ -74,7 +74,7 @@ export const RUNS: Run[] = [
       {
         id: "C2",
         name: "Breadth of language coverage",
-        why: "Codecademy's 40-language catalogue is its main defensibility — entering narrow means entering behind.",
+        why: "Codecademy's 40-language catalogue is its main defensibility; entering narrow means entering behind.",
       },
       {
         id: "C3",
@@ -115,17 +115,17 @@ export const RUNS: Run[] = [
       ],
       summary:
         "Mimo is the closest structural match to how Duolingo already builds: a mobile-first, gamified daily-lesson product with in-app code execution and 15m downloads on $28.6m raised. It scores top of the list on the criterion the buyer cannot compromise on, and lowest on the one it can build.",
-      risk: "No AI tutoring layer to inherit — that gap is a six-to-nine month post-close build, not a day-one capability.",
+      risk: "No AI tutoring layer to inherit; that gap is a six-to-nine month post-close build, not a day-one capability.",
     },
   },
   {
     mode: "sell",
     tab: "Sell-side",
     premise:
-      "A seller wants to know who should buy them. Same engine, inverted — it derives what would make an acquirer want this asset, then scores the acquirer universe.",
+      "A seller wants to know who should buy them. Same engine, inverted: it derives what would make an acquirer want this asset, then scores the acquirer universe.",
     counterpartyRole: "Seller",
     counterparty: "Wayflyer",
-    sector: "FinTech SaaS — embedded SMB capital",
+    sector: "FinTech SaaS: embedded SMB capital",
     geography: "UK, Ireland and Europe",
     universeLabel: "acquirers",
     dnaHeadline:
@@ -150,7 +150,7 @@ export const RUNS: Run[] = [
       {
         id: "C3",
         name: "Embedded finance urgency",
-        why: "Every month of delay locks the best distribution into a competitor — urgency is itself a valuation input.",
+        why: "Every month of delay locks the best distribution into a competitor; urgency is itself a valuation input.",
       },
       {
         id: "C4",
@@ -186,7 +186,7 @@ export const RUNS: Run[] = [
       ],
       summary:
         "Shopify is the highest-conviction acquirer: its merchant base is Wayflyer's borrower profile, Shopify Capital is the product the underwriting engine would immediately upgrade, and the Deliverr deal proves it can execute at this size. The deal logic is defensible to a board in one sentence.",
-      risk: "Shopify Capital is already live in its core markets, which lowers urgency — the argument has to be built on model quality, not on absence.",
+      risk: "Shopify Capital is already live in its core markets, which lowers urgency; the argument has to be built on model quality, not on absence.",
     },
   },
 ];
@@ -195,11 +195,11 @@ export const RUNS: Run[] = [
 export const STEPS = [
   {
     title: "Read the counterparty first",
-    text: "Before any names are gathered, the engine works through the counterparty's own acquisition history, earnings commentary and stated strategy — what they have actually bought, at what size, and to fill which gap.",
+    text: "Before any names are gathered, the engine works through the counterparty's own acquisition history, earnings commentary and stated strategy: what they have actually bought, at what size, and to fill which gap.",
   },
   {
     title: "Derive the rubric from that",
-    text: "Four criteria come out of that reading, specific to this counterparty and traceable to something they did. Four generic criteria — technology, market, team, legal — complete the scoring frame.",
+    text: "Four criteria come out of that reading, specific to this counterparty and traceable to something they did. Four generic criteria (technology, market, team, legal) complete the scoring frame.",
   },
   {
     title: "Discover and score the universe",
@@ -207,6 +207,6 @@ export const STEPS = [
   },
   {
     title: "Output the argument, not the list",
-    text: "A ranked table, a full breakdown per shortlisted name, deal-breaker risks stated explicitly, and a disclaimer separating what was verified from what was model-derived — as HTML and as a deck.",
+    text: "A ranked table, a full breakdown per shortlisted name, deal-breaker risks stated explicitly, and a disclaimer separating what was verified from what was model-derived, delivered as HTML and as a deck.",
   },
 ] as const;

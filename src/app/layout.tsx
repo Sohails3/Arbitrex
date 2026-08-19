@@ -7,15 +7,15 @@ import { AuroraBackground } from "@/components/ui/aurora-background";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.arbitrex.co.uk"),
   title: {
-    default: "Arbitrex — Software for investment banks and private equity",
-    template: "%s — Arbitrex",
+    default: "Arbitrex | Software for investment banks and private equity",
+    template: "%s | Arbitrex",
   },
   description:
-    "Arbitrex builds software for investment banks and private equity firms: bespoke systems, workflow automation and AI implementation — plus our own tools, including an origination engine and a strategic fit engine.",
+    "Arbitrex builds software for investment banks and private equity firms: bespoke systems, workflow automation and AI implementation, plus our own tools, including an origination engine and a strategic fit engine.",
   openGraph: {
     type: "website",
     url: "https://www.arbitrex.co.uk",
-    title: "Arbitrex — Software for investment banks and private equity",
+    title: "Arbitrex | Software for investment banks and private equity",
     description:
       "Bespoke builds, workflow automation and AI implementation, by people who have worked in private equity and investment banking.",
     images: ["/assets/logo-256.png"],

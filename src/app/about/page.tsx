@@ -19,7 +19,7 @@ const INEFFICIENCIES = [
   {
     Icon: Layers,
     title: "Data spread across tools",
-    text: "A screen in one system, filings in another, notes in a third — and no single view that holds them together.",
+    text: "A screen in one system, filings in another, notes in a third, and no single view that holds them together.",
   },
   {
     Icon: GitPullRequestArrow,
@@ -47,19 +47,19 @@ export default function AboutPage() {
           <div className="grid grid-cols-[1fr_1fr] gap-16 max-lg:grid-cols-1 max-lg:gap-10">
             <Reveal variant="left">
               <p className="mb-5 text-base leading-relaxed text-slate-400">
-                Deal teams are not short of data. They are short of process — the
+                Deal teams are not short of data. They are short of process: the
                 connective work between having information and being able to act on it.
                 That work is where the week goes, and it is almost never the part that
                 creates the value.
               </p>
               <p className="mb-5 text-base leading-relaxed text-slate-400">
-                Because we have sat on both sides — the bank running the process and the
-                fund on the other end of it — we know where the friction actually is. It
+                Because we have sat on both sides (the bank running the process and the
+                fund on the other end of it), we know where the friction actually is. It
                 is rarely the analysis. It is the assembly around it: rebuilding the same
                 longlist, reconciling the same figures, chasing the same filings.
               </p>
               <p className="text-base leading-relaxed text-slate-400">
-                So we build the systems we wanted then — for other firms as bespoke
+                So we build the systems we wanted then: for other firms as bespoke
                 software, automation and AI implementation, and for ourselves as the tools
                 you can see on this site. Each one is aimed at a specific question rather
                 than at a category. Opinionated about the workflow, and honest about where

@@ -49,7 +49,7 @@ export const TOOLS: Tool[] = [
     audience: "For M&A advisers and corporate development",
     summary:
       "Derives a buyer's acquisition logic from its own deal history, then scores the universe against it.",
-    question: "Who should buy this company — or what should this buyer acquire?",
+    question: "Who should buy this company, or what should this buyer acquire?",
     input: "A named counterparty, a sector and a geography",
     output: "A ranked, scored and sourced target or acquirer list",
   },

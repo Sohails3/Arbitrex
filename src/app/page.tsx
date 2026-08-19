@@ -21,7 +21,7 @@ export default function Home() {
               Software for the work around the deal
             </h2>
             <p className="max-w-2xl text-base leading-relaxed text-slate-400">
-              Deal teams are not short of data. They are short of process — the connective
+              Deal teams are not short of data. They are short of process: the connective
               work between having information and being able to act on it. That is the
               part we build for.
             </p>
@@ -65,7 +65,7 @@ export default function Home() {
             <p className="max-w-2xl text-base leading-relaxed text-slate-400">
               Alongside client work we build our own tools, each aimed at a specific
               question a deal team actually asks. They are the clearest answer to what we
-              mean by software built around the process rather than around the data —
+              mean by software built around the process rather than around the data,
               and they are examples of the approach, not the whole of what we do.
             </p>
           </Reveal>

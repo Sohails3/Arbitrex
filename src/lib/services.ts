@@ -23,7 +23,7 @@ export const SERVICES: Service[] = [
     summary:
       "Internal tools and workflow systems built for one firm, around the way that firm actually works.",
     body:
-      "Off-the-shelf software makes a firm bend its process to fit the tool. For the work that defines how you operate — pipeline, portfolio monitoring, reporting — that trade is the wrong way round. We build the system around the process instead.",
+      "Off-the-shelf software makes a firm bend its process to fit the tool. For the work that defines how you operate (pipeline, portfolio monitoring, reporting), that trade is the wrong way round. We build the system around the process instead.",
     examples: [
       "Deal pipeline and origination tracking",
       "Portfolio monitoring and KPI dashboards",
@@ -40,7 +40,7 @@ export const SERVICES: Service[] = [
     summary:
       "Removing the manual steps around your existing systems rather than replacing them.",
     body:
-      "Most lost hours are not in the analysis. They are in the assembly around it — collecting the same data, reformatting the same figures, regenerating the same documents. That work is repetitive enough to hand to a machine, and it is the fastest thing to fix.",
+      "Most lost hours are not in the analysis. They are in the assembly around it: collecting the same data, reformatting the same figures, regenerating the same documents. That work is repetitive enough to hand to a machine, and it is the fastest thing to fix.",
     examples: [
       "Data collection and reconciliation",
       "Document and pack generation",
@@ -55,7 +55,7 @@ export const SERVICES: Service[] = [
     Icon: Sparkles,
     title: "AI and agent implementation",
     summary:
-      "Language models put to work where they genuinely help — and kept out of where they do not.",
+      "Language models put to work where they genuinely help, and kept out of where they do not.",
     body:
       "AI is worth deploying on the parts of the job that are genuinely language work: reading long documents, synthesising research, drafting. It is not worth deploying where a wrong answer is expensive and unverifiable. We are explicit about that line, and we build so the output can always be checked against its source.",
     examples: [

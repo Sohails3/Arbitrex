@@ -90,23 +90,6 @@
   --black: #000000;
   --transparent: transparent;
 
-  /* Motiq tokens for src/components/ui/border-beam-panel.tsx, mapped onto the
-     Arbitrex palette. Upstream injects a dark-themed default set from inside
-     the component in `@layer motiq`; that layer is declared after Tailwind's,
-     so it would outrank anything we put in @theme or @layer base. Declaring
-     them unlayered here wins over any layer regardless of order. */
-  --motiq-accent: #7a1e32; /* gold-400 */
-  --motiq-accent-text: #5c1524; /* gold-500 */
-  --motiq-bg: #faf8f7; /* navy-950 */
-  --motiq-border: #ece1e0; /* navy-800 */
-  --motiq-border-strong: #decece; /* navy-700 */
-  --motiq-fg: #1c1417; /* slate-100 */
-  --motiq-fg-secondary: #514042; /* slate-300 */
-  --motiq-muted: #826c6e; /* slate-500 */
-  --motiq-secondary-accent: #9b4358; /* gold-600 */
-  --motiq-signature: #cbb2b0; /* navy-600 — the second comet, kept quiet */
-  --motiq-surface: #ffffff; /* navy-900 */
-  --motiq-surface-2: #f7f1f0; /* navy-850 */
 }
 
 /* --------------------------------------------------------------------------

@@ -16,7 +16,7 @@ export default function ServicesPage() {
       <PageHeader
         label="Services"
         title="Three ways we take work off the desk"
-        intro="Most engagements start with the same question — which part of the week is spent on assembly rather than judgement. The answer decides which of these is the right place to begin."
+        intro="Most engagements start with the same question: which part of the week is spent on assembly rather than judgement. The answer decides which of these is the right place to begin."
       />
 
       <section className="pt-16 pb-8">
@@ -63,7 +63,7 @@ export default function ServicesPage() {
 
       <CtaSection
         heading="Not sure which one you need?"
-        body="That is a normal place to start. Tell us what your week looks like and we will say which of the three would move the needle — or if none of them would."
+        body="That is a normal place to start. Tell us what your week looks like and we will say which of the three would move the needle, or if none of them would."
         secondary={{ href: "/strategic-fit-engine", label: "See a tool we built" }}
       />
     </>

@@ -82,7 +82,7 @@ export function StrategicFitDemo() {
           {/* ---------- Step 1 + 2: DNA and derived rubric ---------- */}
           <div className="flex flex-col gap-6">
             <Reveal variant="left" className="surface-card overflow-hidden">
-              <PanelBar left={`Step 1 — ${run.counterpartyRole.toLowerCase()} DNA`} />
+              <PanelBar left={`Step 1: ${run.counterpartyRole.toLowerCase()} DNA`} />
               <div className="p-5">
                 <p className="mb-5 text-sm leading-relaxed text-slate-300">{run.dnaHeadline}</p>
                 <dl className="flex flex-col gap-3">
@@ -102,7 +102,7 @@ export function StrategicFitDemo() {
             </Reveal>
 
             <Reveal variant="left" delay={80} className="surface-card overflow-hidden">
-              <PanelBar left="Step 2 — derived rubric" right="C1–C4" />
+              <PanelBar left="Step 2: derived rubric" right="C1–C4" />
               <div className="flex flex-col">
                 {run.criteria.map(({ id, name, why }) => (
                   <div key={id} className="border-b border-navy-800 px-5 py-4 last:border-b-0">
@@ -116,7 +116,7 @@ export function StrategicFitDemo() {
                   </div>
                 ))}
                 <p className="border-t border-navy-800 bg-navy-850 px-5 py-3 text-xs leading-relaxed text-slate-500">
-                  C5–C8 are fixed — technology and IP, market position, team, and legal and
+                  C5–C8 are fixed: technology and IP, market position, team, and legal and
                   regulatory risk. Only C1–C4 change with the counterparty.
                 </p>
               </div>
@@ -126,7 +126,7 @@ export function StrategicFitDemo() {
           {/* ---------- Step 3: the ranked universe ---------- */}
           <Reveal variant="right" delay={80} className="surface-card overflow-hidden">
             <PanelBar
-              left={`Step 3 — ranked ${run.universeLabel}`}
+              left={`Step 3: ranked ${run.universeLabel}`}
               right="out of 40"
             />
             <div className="flex flex-col">
@@ -175,7 +175,7 @@ export function StrategicFitDemo() {
 
         {/* ---------- Step 4: the argument for the top name ---------- */}
         <Reveal variant="scale" delay={80} className="surface-card mt-6 overflow-hidden">
-          <PanelBar left="Step 4 — full breakdown" right={`#1 · ${run.top.total}/40`} />
+          <PanelBar left="Step 4: full breakdown" right={`#1 · ${run.top.total}/40`} />
           <div className="grid grid-cols-[1fr_1fr] gap-10 p-6 max-lg:grid-cols-1 max-lg:gap-8">
             <div>
               <h3 className="mb-1 text-lg tracking-tight">{run.top.name}</h3>

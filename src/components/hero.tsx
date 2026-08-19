@@ -87,7 +87,7 @@ export function Hero() {
           </h1>
 
           <Reveal delay={500} as="p" className="mb-8 max-w-[34rem] text-lg leading-[1.65] text-slate-400">
-            Arbitrex builds software for investment banks and private equity firms —
+            Arbitrex builds software for investment banks and private equity firms:
             bespoke systems, automation of the manual work around them, and AI applied
             where it genuinely earns its place. The tools on this site are two we built
             ourselves, and the clearest examples of how we work.
@@ -154,7 +154,7 @@ export function Hero() {
             <div className="relative">
               {/* Origination — a screen result set */}
               <HeroPanel active={panel === 0} first>
-                <PanelBar left="Screen — results" right="4 matches" />
+                <PanelBar left="Screen: results" right="4 matches" />
                 {SCREEN_ROWS.map((row) => (
                   <DataRow
                     key={row.name}
@@ -168,7 +168,7 @@ export function Hero() {
 
               {/* Strategic fit — a ranked, scored counterparty list */}
               <HeroPanel active={panel === 1}>
-                <PanelBar left="Strategic fit — ranked acquirers" right="10 scored" />
+                <PanelBar left="Strategic fit: ranked acquirers" right="10 scored" />
                 {FIT_ROWS.map((row, i) => (
                   <div
                     key={row.name}
